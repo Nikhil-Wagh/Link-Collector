@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "Link Collector",
+  "description": "This extension stores the links of the pages you have visited in mongodb database.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_title": "Link Collector",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "history",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com ; object-src 'self'"
+
+}

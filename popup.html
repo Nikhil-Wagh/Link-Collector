@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Link Collector's Popup</title>
+        <style type="text/css">
+            .jumbotron {
+                padding: 2rem 1rem;
+                margin-bottom: 0px;
+                background-color: #e9ecef;
+                border-radius: .3rem;
+                /*max-width: 272px;*/
+                width: 272px;
+            }
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1 class="display-4">Links Collector</h1>
+            <div class="col-auto">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" class="custom-control-input" id="checkBoxToggle">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Toggle</span>
+                </label>
+            </div>
+            <br>
+            <div class="alert alert-danger" role="alert"  id="alertNotCollecting" >
+                Please check the <strong>Toggle checkbox</strong> to initiate collecting data.
+            </div>
+            <div class="alert alert-success" role="alert" id="alertCollecting" style="display: none">
+                <strong>Well done!</strong> Link collector is collecting all the links in the world.
+            </div>
+        </div>
+    </body>
+    <!--<footer>
+        <script src="popup.js"></script>
+    </footer>-->
+</html>
