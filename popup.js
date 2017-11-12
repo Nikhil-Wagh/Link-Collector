@@ -1,5 +1,4 @@
-console.log("Popup Script");
-
+//console.log("Popup Script");
 //====================== UPDATE 2.0 =======================//
 /*window.onload = function () {
     var chkBox = document.getElementById('checkBoxToggle');
@@ -18,24 +17,28 @@ console.log("Popup Script");
 }*/
 
 //===================== UPDATE 1.1 ========================//
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+    if(tab.url !== undefined && changeInfo.status == "complete"){
+        console.log("Changed URL: " + changeInfo.url);
+       // alert("Changed URL: " + tab.url);
+        init(tabId);
+    }
+});
+function init(tabId){
+    chrome.storage.sync.get("enabledExtension", function (item) {
+        if(item['enabledExtension'] == true){//Run content Script
+            console.log("Popup: Executing content Script");
+            chrome.tabs.executeScript(tabId, {
+                file: "injectScript.js",
+                allFrames: true,
+                runAt: "document_end"
+            });
+        }
+    })
+}
 window.onload = function () {
     checkAlert();
     checkToggle();
-    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-        init(tabId);
-    });
-    function init(tabId){
-        chrome.storage.sync.get("enabledExtension", function (item) {
-            if(item['enabledExtension'] == true){//Run content Script
-                console.log("Popup: Executing content Script");
-                chrome.tabs.executeScript(tabId, {
-                    file: "injectScript.js",
-                    allFrames: true,
-                    runAt: "document_end"
-                });
-            }
-        })
-    }
     function checkToggle() {
         var chkToggle = document.querySelector("input[id=checkBoxToggle]");
 
@@ -73,7 +76,7 @@ window.onload = function () {
             }
         });
     }
-}
+};
 
 
 
