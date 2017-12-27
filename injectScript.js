@@ -12609,8 +12609,6 @@ var getLink = function (tag) {
         var map = new Map();
         for(var link of links){
             if(link.length > 0) {
-                //console.log(typeof(link));
-                //console.log("LINK: " + link);
                 if (map.has(link)) {
                     map.set(link, map.get(link) + 1);
                 }
@@ -12619,17 +12617,16 @@ var getLink = function (tag) {
                 }
             }
         }
-       // console.log("Size: ", map.size);
-        /*for(var [key, value] of map.entries()){
-            console.log(key, " :: ", value);
-        }*/
+        console.log("Total number of links on this page: ", map.size);
+        for(var [key, value] of map.entries()){
+            console.log("Content_Script :: Link: ", key, " :: Count: ", value);
+        }
         doThis(map);
     }
 };
 
 function doThis(links) {
     if(links !==  undefined) {
-        //console.log("Links : ", links);
         console.log("Attempting to connect to MongoDB");
         const client = new stitch.StitchClient('fast-net-zvpuf');
         const db = client.service('mongodb', 'mongodb-atlas').db('linkCollector');
@@ -12643,15 +12640,6 @@ function doThis(links) {
                     "count": count,
                 });
             }
-            /*for (var i = 0; i < links.size; i++) {
-                var document = {
-                    "owner_id": client.authedId(),
-                    "link": links[i],
-                };
-                //console.log("Document: " + document);
-                list.push(document);
-            }*/
-            //console.log("Received list:" + list);
             return list;
         }
 
@@ -12676,14 +12664,5 @@ var getAllLinks = function(){
     getLink("a");
 };
 
-/*function addMongoScript(callback) {
-    var script = document.createElement('script');
-    script.src = chrome.extension.getURL('stitch-sdks_js_library_v2_stable_stitch.js');
-    script.onload = callback;
-    (document.head || document.documentElement).appendChild(script);
-}
-
-
-addMongoScript(doThis);*/
 getAllLinks();
 
