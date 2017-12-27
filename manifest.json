@@ -14,12 +14,14 @@
     "activeTab",
     "storage",
     "history",
-    "<all_urls>"
+    "<all_urls>",
+    "https://s3.amazonaws.com/"
   ],
-  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com ; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com https://s3.amazonaws.com; object-src 'self'",
 
   "background": {
-    "scripts": ["popup.js"]
+    "scripts": [
+      "popup.js"
+    ]
   }
-
 }
