@@ -12628,7 +12628,7 @@ var getLink = function (tag) {
 function doThis(links) {
     if(links !==  undefined) {
         console.log("Attempting to connect to MongoDB");
-        const client = new stitch.StitchClient('fast-net-zvpuf');
+        const client = new stitch.StitchClient('fast-net-zvpuf', "google");
         const db = client.service('mongodb', 'mongodb-atlas').db('linkCollector');
 
         function getList() {

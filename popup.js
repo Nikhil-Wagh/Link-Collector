@@ -18,7 +18,7 @@
 
 //===================== UPDATE 1.1 ========================//
 
-const client = new stitch.StitchClient('fast-net-zvpuf');
+const client = new stitch.StitchClient('fast-net-zvpuf', "google");
 const db = client.service('mongodb', 'mongodb-atlas').db('linkCollector');
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
@@ -43,24 +43,27 @@ function init(tabId){
 
 
 function sendLink(url) {
-    var f = {
-        "owner_id": client.authedId(),
-        "link": url,
-    };
+
 
     function getCount(docs) {
         var count = docs.count;
-        if(count != undefined){
+        if(!count.isNaN()){
             return count+1;
         }
         return 1;
     }
 
-    client.login().then(()=>
-        db.collection('clickedLinks').find(f).execute()
+    client.authenticate("google").then(()=>
+        db.collection('clickedLinks').find({
+            'owner_id': client.authedId(),
+            'link': url,
+        }).execute()
     ).then(docs => {
         console.log("Old docs ", docs)
-        db.collection('clickedLinks').insertOne({
+        db.collection('clickedLinks').updateOne({
+            "owner_id": client.authedId(),
+            "link": url,
+        },{
             "owner_id": client.authedId(),
             "link": url,
             "count": getCount(docs),
@@ -96,7 +99,7 @@ function sendLink(url) {
 }
 
 function login(url) {
-    client.authWithOAuth("google").then(sendLink(url));
+    client.authenticate("google").then(sendLink(url));
 }
 
 /*
